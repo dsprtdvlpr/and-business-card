@@ -1,8 +1,5 @@
 const functions = require('firebase-functions');
-const admin = require('firebase-admin');
 const businessCardAppServiceSingleton = require("./utils/singletons/business-card-app-service-singleton");
-
-admin.initializeApp();
 
 exports.list = functions.https.onRequest(async (request, response) => {
     const businessCards = await businessCardAppServiceSingleton.list();
@@ -15,15 +12,13 @@ exports.list = functions.https.onRequest(async (request, response) => {
                 title: businessCard.getTitle()
             };
         }));
-
-
 });
 
-exports.add = functions.https.onRequest((request, response) => {
+exports.add = functions.https.onRequest(async (request, response) => {
     const { name, title } = request.body;
     const id = await businessCardAppServiceSingleton.add(name, title);
 
     response
         .set("Access-Control-Allow-Origin", "*")
-        .send({ "id": id });
+        .send({ id: id });
 });

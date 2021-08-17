@@ -1,15 +1,15 @@
 class BusinessCardRepository {
 
-    constructor(businessCardLocalDataStore) {
-        this._businessCardLocalDataStore = businessCardLocalDataStore;
+    constructor(businessCardLocalDataSource) {
+        this.businessCardLocalDataSource = businessCardLocalDataSource;
     }
 
     async list() {
-        return this._businessCardLocalDataStore.list();
+        return this.businessCardLocalDataSource.list();
     }
 
     async add(name, title) {
-        return this._businessCardLocalDataStore.add(name, title);
+        return this.businessCardLocalDataSource.add(name, title);
     }
     
 }
