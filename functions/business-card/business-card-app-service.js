@@ -1,3 +1,5 @@
+const BusinessCard = require("./business-card");
+
 class BusinessCardAppService {
 
     constructor(businessCardRepository) {
@@ -9,6 +11,8 @@ class BusinessCardAppService {
     }
 
     async add(name, title) {
+        BusinessCard.assertValidName(name);
+        BusinessCard.assertValidTitle(title);
         return this._businessCardRepository.add(name, title);
     }
 
